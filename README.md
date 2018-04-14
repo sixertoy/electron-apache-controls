@@ -1,5 +1,7 @@
 # Electron Apache Controls
 
+![Electron Apache Controls](./screenshot.png)
+
 ## Install
 
 ```bash
@@ -30,5 +32,6 @@ yarn compile
 
 ### Real Issues
 
+- [ ] Mixed translation French/English
 - [ ] No Debug mode / Error(s) report
 - [ ] Error when canceling root prompt
