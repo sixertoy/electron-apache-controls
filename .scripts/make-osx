@@ -11,6 +11,7 @@ const path = require('path');
 const mm = require('micromatch');
 const png2icons = require('png2icons');
 const packager = require('electron-packager');
+
 const pkg = require('./../package.json');
 if (!pkg.files || !pkg.files.length) {
   throw new Error('Missing files definitions in package.json');
