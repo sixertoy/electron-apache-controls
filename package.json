@@ -1,0 +1,37 @@
+{
+  "name": "apache-controls",
+  "productName": "Apache Controls",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./main.js",
+  "homepage": "./",
+  "files": [
+    "/main.js",
+    "/yarn.lock",
+    "/README.md",
+    "/package.json",
+    "/assets|/assets/**/*",
+    "/system|/system/**/*"
+  ],
+  "devDependencies": {
+    "electron": "^1.7.10",
+    "electron-packager": "^10.1.1",
+    "electron-winstaller": "^2.6.3",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "husky": "^0.14.3",
+    "micromatch": "^3.1.10",
+    "png2icons": "^1.0.1"
+  },
+  "scripts": {
+    "dev": "electron .",
+    "build": "node ./.scripts/make-osx",
+    "compile": "electron-installer-dmg ./releases/Apache\\ Controls-darwin-x64/Apache\\ Controls.app ./releases/Apache\\ Controls --overwrite"
+  },
+  "dependencies": {
+    "sudo-prompt": "^8.2.0"
+  }
+}

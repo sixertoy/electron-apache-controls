@@ -1,0 +1,55 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "node": true,
+    "mocha": true,
+    "browser": true
+  },
+  "rules": {
+    "indent": [2, 2],
+    "padded-blocks": 0,
+    "max-len": [2, 100, { "ignoreTemplateLiterals": true }],
+    "space-before-function-paren": [
+      2,
+      {
+        "named": "always",
+        "anonymous": "always",
+        "asyncArrow": "ignore"
+      }
+    ],
+    "no-underscore-dangle": [
+      2,
+      {
+        "allowAfterThis": true,
+        "allowAfterSuper": true
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      2,
+      {
+        "devDependencies": ["main.js", "system/**/*", "**/*.spec.js", ".scripts/**/*"]
+      }
+    ],
+    "react/jsx-closing-tag-location": 0,
+    "react/jsx-closing-bracket-location": [
+      2,
+      {
+        "nonEmpty": "after-props",
+        "selfClosing": "after-props"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "react/jsx-first-prop-new-line": [2, "never"],
+    "react/forbid-prop-types": [
+      1,
+      {
+        "forbid": ["any"]
+      }
+    ]
+  }
+}

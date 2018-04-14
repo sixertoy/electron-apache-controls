@@ -1,0 +1,68 @@
+#!/usr/bin/env node
+
+/**
+ *
+ * Build OSX Application
+ *
+ */
+const cwd = process.cwd();
+const fs = require('fs');
+const path = require('path');
+const mm = require('micromatch');
+const png2icons = require('png2icons');
+const packager = require('electron-packager');
+const pkg = require('./../package.json');
+if (!pkg.files || !pkg.files.length) {
+  throw new Error('Missing files definitions in package.json');
+  process.exit(1);
+}
+
+const assetspath = path.join(cwd, 'assets', 'mac');
+let pngfile = path.join(assetspath, 'app-icon.png');
+
+// Electron Packager available options
+// https://github.com/electron-userland/electron-packager/blob/master/docs/api.md
+const packagerConfig = {
+  prune: true,
+  quiet: false,
+  overwrite: true,
+  platform: 'darwin',
+  dir: path.join(cwd),
+  packageManager: 'yarn',
+  out: path.join(cwd, 'releases'),
+  icon: path.join(assetspath, 'app-icon.icns'),
+  ignore: function(filepath) {
+    // exclude files not defined in package.json
+    // https://github.com/micromatch/micromatch
+    if (filepath === '') return false;
+    return !mm(filepath, pkg.files).length;
+  },
+};
+
+// Read PNG Icon file
+fs.readFile(pngfile, (err, input) => {
+  if (err) {
+    throw new Error(err);
+    process.exit(1);
+  }
+  // Convert PNG icon to ICNS Apple Icon File
+  // https://www.npmjs.com/package/png2icons
+  const converted = png2icons.PNG2ICNS(input, png2icons.BILINEAR, true, 0);
+  pngfile = path.join(assetspath, 'app-icon.icns');
+  // Write ICNS Icon file to disk
+  fs.writeFile(pngfile, converted, err => {
+    if (err) {
+      throw new Error(err);
+      process.exit(1);
+    }
+    // Package the Application
+    packager(packagerConfig)
+      .then(apppaths => {
+        console.log('Application packaged with success');
+      })
+      .catch(err => {
+        console.log(err);
+        process.exit(1);
+      });
+  });
+});
